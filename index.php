@@ -13,7 +13,7 @@
   <body>
     <div class="container-fluid pt-5">
       <div class="row justify-content-around">
-        <div class="col-5"><a class="btn btn-primary" href="/admin.php" role="button">Vista Administracion</a></div>
+        <div class="col-5"><a class="btn btn-primary" href="admin.php" role="button">Vista Administracion</a></div>
         <div class="col-5"><a class="btn btn-primary" href="cliente.php" role="button">Vista Cliente</a></div>
         <?php 
           #include("config.php");

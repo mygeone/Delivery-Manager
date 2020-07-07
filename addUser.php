@@ -2,8 +2,6 @@
 include("header.php");
 include("config.php");
 
-print_r($_POST);
-
 #  print_r($_POST);
 $rut=$_POST['rut'];
 $nombre=$_POST['nombre'];
@@ -24,5 +22,6 @@ $CCV=$_POST['pago_ccv'];
 $queryPago = 'INSERT INTO public."MetodoPago"("Metodo_ID","Nombre_Metodo","Numero_Tarjeta","Fecha_Expiracion","CCV") values($1,$2,$3,$4,$5)';
 $resultQueryPago = pg_query_params($conexion, $queryPago, array($metodo_ID,$Nombre_Metodo,$Numero_Tarjeta,$Fecha_Expiracion,$CCV));
 
+$queryDireccion =  'INSERT INTO public."Direccion"( 
 
 ?>
