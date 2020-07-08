@@ -52,39 +52,13 @@ if($_GET['step'] == 1){
                                 </form>
                             </div>
                         </div>
-                    </div>
-
-
-                    <select id="nameProducts">
-                        <option value="">Select Product</option>';
-                            $query = 'SELECT * FROM public."Productos" '; 
-                            $result = pg_query($conexion,$query );
-                            if(pg_num_rows($result) > 0){ 
-                                while($row = pg_fetch_assoc($result)){
-                                    echo '<option value="'.$row['Prod_ID'].'">'.$row['Nombre_Prod'].'</option>'; 
-                                }
-                            }else{ 
-                                echo '<option value="">Product not available</option>'; 
-                            };
-       echo '      </select>
-
-
-                    <!-- Quantity dropdown -->
-                    <select id="stock">
-                        <option value="">Select Quantity</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-            ';    
+                    </div>';   
     }else{
         echo
             '
             <div class="display-4">Rut no existe</div>';
-            #header("Location: 3;url=/proyectoBDD/registerUser.php");
+            header("Location: 3;url=/proyectoBDD/registerUser.php");
         } ?>
-
-
 
 <?php } ?>
 
