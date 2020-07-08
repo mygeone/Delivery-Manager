@@ -10,7 +10,7 @@ if($option == 0){
     $row = pg_fetch_all($q);
     ?>
     <div class="container">
-        <div class="row">
+        <div class="row ">
             <div class="col-2">Codigo Producto</div>
             <div class="col-2">Nombre Producto</div>
             <div class="col-2">Precio Producto</div>
@@ -22,7 +22,9 @@ if($option == 0){
             <div class="col-2 "><?php echo $value['Nombre_Prod'];?></div>
             <div class="col-2 "><?php echo $value['Precio_Prod'];?></div>
             <div class="col-2 "><?php echo $value['Cant_Prod'];?></div>
-            <div class="col-3"><a class="btn btn-primary btn-sm" href="/proyectoBDD/modificarProducto.php/?id=<?php echo $value['Prod_ID'] ?>" role="button">Modificar Producto</a></div>
+            <div class="col-2"><a class="btn btn-primary btn-sm" href="/proyectoBDD/modificarProducto.php/?id=<?php echo $value['Prod_ID'] ?>" role="button">Modificar Producto</a></div>
+            <div class="col-2"><a class="btn btn-primary btn-sm" href="/proyectoBDD/deleteProduct.php/?id=<?php echo $value['Prod_ID'] ?>" role="button">Eliminar Producto</a></div>
+
         </div>
         <?php } ?>
     </div>

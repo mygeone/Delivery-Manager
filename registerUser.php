@@ -14,7 +14,6 @@ include("header.php")
     <div id="legend">
         <legend class="">Datos personales</legend>
     </div>
-    
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">Rut</label>
@@ -59,7 +58,6 @@ include("header.php")
     <div id="legend">
         <legend class="">Método de pago</legend>
     </div>
-
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">Nombre Titular</label>
