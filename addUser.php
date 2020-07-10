@@ -2,7 +2,7 @@
 include("header.php");
 include("config.php");
 
-print_r($_POST);
+#print_r($_POST);
 
 $rut=pg_escape_string($_POST['rut']);
 $nombre=pg_escape_string($_POST['nombre']);
@@ -21,12 +21,20 @@ $DirecionComuna = pg_escape_string($_POST['direccion_comuna']);
 $DireccionAlias = pg_escape_string($_POST['direccion_alias']);
 
 
-#$queryUser = 'INSERT INTO public."Cliente"("Cliente_ID","Email","Nombre_Cliente") values ($1,$2,$3) ';
-#$resultQueryUser = pg_query_params($conexion, $query, array($rut,$nombre,$email));
+$queryUser = 'INSERT INTO public."Cliente"("Cliente_ID","Email","Nombre_Cliente") 
+            values ('."'".$rut."'".','."'".$email."'".','."'".$nombre."'".') ';
+#print($queryUser);
+$resultQueryUser = pg_query($conexion, $queryUser);
 
-#$queryPago = 'INSERT INTO public."MetodoPago"("Metodo_ID","Nombre_Metodo","Numero_Tarjeta","Fecha_Expiracion","CCV") values($1,$2,$3,$4,$5)';
-#$resultQueryPago = pg_query_params($conexion, $queryPago, array($metodo_ID,$Nombre_Metodo,$Numero_Tarjeta,$Fecha_Expiracion,$CCV));
 
-#$queryDireccion =  'INSERT INTO public."Direccion"( 
+$queryPago = 'INSERT INTO public."MetodoPago"("Rut_Titular","Alias_Metodo","Nombre_Metodo","Numero_Tarjeta","Fecha_Exp","CCV") 
+            values('."'".$rut."'".','."'".$AliasPago."'".','."'".$nombre."'".','."'".$Numero_Tarjeta."'".','."'".$Fecha_Expiracion."'".','."'".$CCV."'".')';
+#print($queryPago);
+$resultQueryPago = pg_query($conexion, $queryPago);
+
+
+$queryDireccion = 'INSERT INTO public."Direccion"("Rut_Titular","Calle","Numero","Comuna","Ciudad","Alias_Direccion") 
+                values('."'".$rut."'".','."'".$DireccionCalle."'".','."'".$DireccionNum."'".','."'".$DirecionComuna."'".','."'".$DireccionCiudad."'".','."'".$DireccionAlias."'".')';
+$resulQueryDirecicon = pg_query($conexion, $queryDireccion);
 
 ?>
