@@ -1,6 +1,7 @@
 <?php
 include_once("header.php");
 include_once("config.php");
+
 ?>
 <div class="container mt-5">
     <div class="row">
@@ -13,13 +14,13 @@ $sql = 'SELECT * from public."Direccion" where "Rut_Titular" ='."'".$_GET['rut']
 $q = pg_query($conexion,$sql);
 $results = pg_fetch_all($q);
 echo '
-<form action="#'.$_GET['rut'].'" method="POST">';
+<form action="/proyectoBDD/elegirMetodosDePago.php/?rut='.$_GET['rut'].'&order='.$_GET['order'].' "method="POST">';
 foreach($results as $key => $value){
     echo '
         <div class="input-group border border-black mt-3 ml-5">
         <div class="input-group-prepend">
             <div class="input-group-text">
-            <input type="radio" name="direccionElegida" aria-label="Radio button for following text input">
+            <input type="radio" name="'.$value['Alias_Direccion'].'" aria-label="Radio button for following text input">
             </div>
         </div>
             <div class="container ml-5">

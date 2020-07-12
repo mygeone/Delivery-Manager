@@ -12,4 +12,11 @@ $results = pg_fetch_all($q);
 
 print_r($results);
 
+echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">Producto eliminado con exito.
+            </div>
+        </div>
+    ';
+
 ?>

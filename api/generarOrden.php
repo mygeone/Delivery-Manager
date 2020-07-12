@@ -18,7 +18,6 @@ foreach($_SESSION['cart'][$_GET['rut']] as $idProd => $cantidad){
         }   
     }
 }
-
 #------pregunta por el total pagado--------
 $preSql = '';
 $count = 0;
@@ -86,7 +85,6 @@ $results = pg_fetch_assoc($q);
             $ProductsToDetailedOrder = "'".$array."'";
             $QuantityToDetailedOrder = "'".$array2."'";
             $PricesToDetailedOrder = "'".$array3."'";
-            #print_r($QuantityToDetailedOrder);
 
 #----QUERY: ESCRIBE ORDEN DETALLE---------
 $preSqlOrdenDetalle = 'INSERT into public."OrdenDetalle" ("Orden_Detalle_ID","ProdsPagados_ID","ProdsPagados_Precio","ProdsPagados_Cantidad")
@@ -102,6 +100,7 @@ foreach($listProducts as $key => $ID){
                 ';
     $q = pg_query($conexion,$sqlUpdateStock);
 }
+header('Location: \proyectoBDD\elegirDireccion.php\?step=1&rut='.$_GET['rut'].'&order='.$numOrder);
 ?>
 
 

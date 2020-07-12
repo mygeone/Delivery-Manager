@@ -7,7 +7,7 @@ $id = $_GET['id'];
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <p class="lead">Modificar producto ID: <?php echo $id?></p>
+        <p class="display-4 mb-5">Modificar producto ID: <?php echo $id?></p>
         </div>
     </div>
     <?php
@@ -36,8 +36,8 @@ $id = $_GET['id'];
     <div class="container">
     </div>
     <div class="row d-flex justify-content-end">
-            <div class="col-3"><button type="submit" class="btn btn-primary">Submit</button></div>
-        </div>
+        <div class="col-3"><button type="submit" class="btn btn-primary">Modificar</button></div>
+    </div>
     </form>            
 
 

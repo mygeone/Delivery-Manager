@@ -9,7 +9,8 @@ if($option == 0){
     $q = pg_query($conexion, 'select * from public."Productos" ');
     $row = pg_fetch_all($q);
     ?>
-    <div class="container">
+    <div class="container mt-5">
+        <p class="display-4 mb-5">Lista Productos</p>
         <div class="row ">
             <div class="col-2">Codigo Producto</div>
             <div class="col-2">Nombre Producto</div>

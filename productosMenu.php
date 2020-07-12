@@ -4,12 +4,16 @@ include("config.php");
 include("header.php");
 ?>
 
-<div class="container-fluid pt-5">
+<div class="container pt-5">
+  <p class="display-4 mb-5">Administrar Productos</p>
   <div class="row justify-content-start mt-5">
     <div class="col-4"><a class="btn btn-primary" href="productosOut.php/?key=0" role="button">Listar todos los productos</a></div>
   </div>
   <div class="row justify-content-start mt-2">
     <div class="col-4"><a class="btn btn-primary" href="productosOut.php/?key=1" role="button">Filtrar Productos</a></div>
+  </div>
+  <div class="row justify-content-start mt-2">
+     <div class="col-4"><a class="btn btn-primary" href="agregarProducto.php" role="button">Agregar Productos</a></div>
   </div>
 </div>
 

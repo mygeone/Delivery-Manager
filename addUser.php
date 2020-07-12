@@ -37,4 +37,11 @@ $queryDireccion = 'INSERT INTO public."Direccion"("Rut_Titular","Calle","Numero"
                 values('."'".$rut."'".','."'".$DireccionCalle."'".','."'".$DireccionNum."'".','."'".$DirecionComuna."'".','."'".$DireccionCiudad."'".','."'".$DireccionAlias."'".')';
 $resulQueryDirecicon = pg_query($conexion, $queryDireccion);
 
+echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">Usuario agregado con exito.
+            </div>
+        </div>
+    ';
+
 ?>
