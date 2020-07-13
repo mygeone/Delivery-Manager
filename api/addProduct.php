@@ -27,6 +27,7 @@ header('Refresh: 4; URL=/proyectoBDD/productosMenu.php');
 ?>
 <!--sql
 
-INSERT INTO public."Productos" ("Prod_ID","Nombre_Prod","Precio_Prod","Cant_Prod") 
+INSERT INTO public."Productos" 
+("Prod_ID","Nombre_Prod","Precio_Prod","Cant_Prod") 
 values ('97598','Helado Chocolate','1000','90') 
 -->

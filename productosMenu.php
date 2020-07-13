@@ -5,16 +5,18 @@ include("header.php");
 include("footer.php");
 ?>
 
-<div class="container pt-5">
+<div class="container pt-5 d-flex justify-content-center">
   <p class="display-4 mb-5">Administrar Productos</p>
-  <div class="row justify-content-start mt-5">
-    <div class="col-4"><a class="btn btn-primary" href="productosOut.php/?key=0" role="button">Listar todos los productos</a></div>
+</div>
+<div class="contaniner">
+  <div class="row d-flex justify-content-center mt-5">
+    <a class="btn btn-primary" href="productosOut.php/?key=0" role="button">Listar todos los productos</a>
   </div>
-  <div class="row justify-content-start mt-2">
-    <div class="col-4"><a class="btn btn-primary" href="productosOut.php/?key=1" role="button">Filtrar Productos</a></div>
+  <div class="row justify-content-center mt-2">
+    <a class="btn btn-primary" href="productosOut.php/?key=1" role="button">Filtrar Productos</a>
   </div>
-  <div class="row justify-content-start mt-2">
-     <div class="col-4"><a class="btn btn-primary" href="agregarProducto.php" role="button">Agregar Productos</a></div>
+  <div class="row justify-content-center mt-2">
+     <a class="btn btn-primary" href="agregarProducto.php" role="button">Agregar Productos</a>
   </div>
 </div>
 

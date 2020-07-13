@@ -31,6 +31,6 @@
         <a class="py-2 d-none d-md-inline-block" href="/proyectoBDD/AdminClientes.php">Administrar Clientes</a>
         <a class="py-2 d-none d-md-inline-block" href="/proyectoBDD/AdminOrdenes.php">Administrar Ordenes</a>
         <a class="py-2 d-none d-md-inline-block" href="/proyectoBDD/productosMenu.php">Administrar Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">SQL</a>
+        <a class="py-2 d-none d-md-inline-block" href="/proyectoBDD/sql.php">SQL</a>
       </div>
   </nav>

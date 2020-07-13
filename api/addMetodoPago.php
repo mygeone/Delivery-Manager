@@ -53,3 +53,6 @@ select exists(select "Alias_Direccion","Rut_Titular"
                 from public."Direccion" 
                 where "Alias_Direccion" = 'casa mama' 
                 and "Rut_Titular" = '9492314k') 
+
+                 INSERT INTO public."MetodoPago" 
+                 ("Rut_Titular","Alias_Metodo","Nombre_Metodo","Numero_Tarjeta","CCV","Fecha_Exp") values ('160770641', 'paypal', 'Crédito', '151684654', '848', '2020-07-07' )     

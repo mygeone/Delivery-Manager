@@ -60,7 +60,7 @@ if(isset($_POST['applyStockFilter']) and isset($_POST['applyPriceFilter'])){
     $preSql .= $sqlStock;
 
 }
-print($preSql);
+#print($preSql);
 
 if(!isset($_POST['applyIDFilter'])){
     $results = pg_query($conexion,$preSql);

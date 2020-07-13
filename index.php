@@ -16,14 +16,15 @@
   include("footer.php");
   ?>
 
-    <div class="container justify-content-center pt-5">
-    <p class="display-4 justify-content-center mb-5">Delivery Manager</p>
-      <div class="row  justify-content-center">
-        <div class="col-5"><a class="btn btn-primary" href="admin.php" role="button">Vista Administracion</a></div>
+    <div class="container d-flex justify-content-center pt-5">
+      <p class="display-4 justify-content-center mb-5">Delivery Manager</p>
+    </div>
+
+    <div class="containerpt-5">
+      <div class="row  d-flex justify-content-center my-3 ">
+        <a class="btn btn-primary" href="admin.php" role="button">Vista Administracion</a>
       </div>
-      <div class="row mt-3 justify-content-center"> 
-        <div class="col-5"><a class="btn btn-primary" href="cliente.php" role="button">Vista Cliente</a></div>
-      </div>
+    </div>
       
         <?php 
           #include("config.php");
