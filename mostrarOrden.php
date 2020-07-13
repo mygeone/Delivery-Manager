@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 include("config.php");
+include("footer.php");
 
     #--------Verifica si orden fue cancelada------
     $orderToVerify = pg_escape_string($_GET['order']);
@@ -9,7 +10,8 @@ include("config.php");
                         where "Orden_ID" ='."'".$orderToVerify."'";
     $q = pg_query($conexion,$query);
     $results = pg_fetch_all($q);    
-    
+    #print($query);
+
     if(pg_affected_rows($q) == 0){
         echo '
         <div class="container my-4 mx-5">
@@ -38,20 +40,27 @@ include("config.php");
 foreach($_POST as $aliasMetodo => $status){
     $aliasMetodo = str_replace('_',' ',($aliasMetodo));
     #$AliasDireccion = $aliasMetodo;
-    $sql = 'UPDATE public."OrdenDetalle" 
+    $sql = 'UPDATE public."Orden" 
             SET "Alias_Metodo" = '."'".$aliasMetodo."'".' 
-            where "Orden_Detalle_ID" ='."'".$_GET['order']."'";
+            where "Orden_ID" ='."'".$_GET['order']."'";
    
     $q = pg_query($conexion,$sql);
     $results = pg_fetch_all($q);
+    #print($sql);
 }
+
 ?>
 <div class="container">
+    <p class="display-4 my-5">Detalles de orden</p>
     <div class="row">
         <div class="col-4">
             <div class="container mt-5 py-3 ">
                 <div class="row">
-                    <div class="col-12 d-flex justify-content-center border border-black py-3">Detalles de Orden</div>
+                    <div class="col-12 d-flex justify-content-center border border-black py-3<div id="legend">
+                        <div id="legend">
+                            <legend class="">Detalles de orden</legend>
+                         </div>
+                    </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 border border-black py-3">
@@ -81,74 +90,58 @@ foreach($_POST as $aliasMetodo => $status){
             </div>
         </div>
 
-        <!-----asa--->
+      
         <div class="col-8">
 
             <div class="container-fluid mt-5 py-3 px-3">
                 <div class="row">
-                    <div class="col-12 d-flex justify-content-center  border border-black py-3 px-3">Detalles de Productos</div>
+                    <div class="col-12 d-flex justify-content-center  border border-black py-3 px-3">
+                        <div id="legend">
+                            <legend class="">Detalles de productos</legend>
+                         </div>
+                    </div>
                 </div>
                 <div class="row mt-2 mt-1 ">
                     <div class="col-12  border border-black py-3 px-3">
                        <div class="row">
-                        <div class="col-3">ID Producto</div>
-                        <div class="col-3">Nombre Producto</div>
-                        <div class="col-3">Cantidad Producto</div>
-                        <div class="col-3">Precio Total</div>
+                        <div class="col-2">ID Producto</div>
+                        <div class="col-3">Nombre </div>
+                        <div class="col-2">Cantidad</div>
+                        <div class="col-3">Precio Producto</div>
+                        <div class="col-2">Subtotal</div>
                     </div>
 
             <?php 
             
-            #-----QUERY ORDEN-------
+            #-----QUERY PRODUCTOS-------
             $sql = 'SELECT *
-                    from public."OrdenDetalle"
-                    where "Orden_Detalle_ID" ='."'".$_GET['order']."'";
+                    from public."OrdenDetalleProductos"
+                    where "Orden_ID" ='."'".$_GET['order']."'";
             $q = pg_query($conexion,$sql);
-            $results = pg_fetch_assoc($q);
-            $ProdsPagados_ID = explode(",", $results['ProdsPagados_ID']);
-            $ProdsPagados_Precio = explode(",", $results['ProdsPagados_Precio']);
-            $ProdsPagados_Cantidad = explode(",", $results['ProdsPagados_Cantidad']);
-
+            $results = pg_fetch_all($q);
             
-            $ProdsPagados_Precio = str_replace('{','',$ProdsPagados_Precio);
-            $ProdsPagados_Precio = str_replace('}','',$ProdsPagados_Precio);
+            #print_r($results);
             
-
-            $ProdsPagados_Cantidad = str_replace('{','',$ProdsPagados_Cantidad);
-            $ProdsPagados_Cantidad = str_replace('}','',$ProdsPagados_Cantidad);
-
-
-            $array = '';
-            foreach($ProdsPagados_ID as $key => $value){
-                $array .= "'".$value."'".",";
-            }
-            $newArray = rtrim($array, ", ");
-
-            $newArray = str_replace('{','(',$newArray);
-            $newArray = str_replace('}',')',$newArray);
-            $newArray = str_replace("'(","('",$newArray);
-            $newArray = str_replace(")'","')",$newArray);
-            
-            #-----QUERY PRODUCTOS--------
-            $sql = 'SELECT * 
-                    from public."Productos"
-                    where "Prod_ID" in '.$newArray;
-            $q = pg_query($conexion,$sql);
-
-            $results = pg_fetch_all($q);            
             
             foreach($results as $key => $dataProduct){
+                $sql = ' select "Nombre_Prod"
+                        from public."Productos"
+                        where "Prod_ID" ='."'".$dataProduct['ID_Producto_Pagado']."'".    '
+                ';
+
+
+
+
             echo '
             <div class="row">
-                <div class="col-3">'.$dataProduct['Prod_ID'].'</div>
-                <div class="col-3">'.$dataProduct['Nombre_Prod'].'</div>
-                <div class="col-3">'.$ProdsPagados_Cantidad[$key].'</div>
-                <div class="col-3">'.$ProdsPagados_Precio[$key].'</div>
+                <div class="col-2">'.$dataProduct['ID_Producto_Pagado'].'</div>
+                <div class="col-3">'.$dataProduct['Cant_Producto_Pagado'].'</div>
+                <div class="col-2">'.$dataProduct['Cant_Producto_Pagado'].'</div>
+                <div class="col-3">'.$dataProduct['Precio_Producto_Pagado'].'</div>
+                <div class="col-2">$'.intval($dataProduct['Precio_Producto_Pagado'])*intval($dataProduct['Cant_Producto_Pagado']).'</div>
             </div> 
             ';
              } ?>
-
-
         </div>
     </div>
     </div>
@@ -160,16 +153,21 @@ foreach($_POST as $aliasMetodo => $status){
         <!-- DETALLE PAGO -->
         <div class="col-6">
             <div class="container border border-black mt-5  py-3 px-3 ">
-                <div class="row d-flex justify-content-center"><div class="col-6">Detalles de Metodo de Pago</div></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6">
+                        <div id="legend">
+                            <legend class="">Detalles de Pago</legend>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- DETALLE PAGO -->
             <?php $sql = 
                 'select "Numero_Tarjeta", "Fecha_Exp","MetodoPago"."Alias_Metodo"
-                from public."OrdenDetalle",public."MetodoPago",public."Orden"
-                where "OrdenDetalle"."Alias_Metodo" = "MetodoPago"."Alias_Metodo"
+                from public."MetodoPago",public."Orden"
+                where "Orden"."Alias_Metodo" = "MetodoPago"."Alias_Metodo"
                 and "Orden"."Cliente_ID" = "MetodoPago"."Rut_Titular"
-                and "OrdenDetalle"."Orden_Detalle_ID" = "Orden"."Orden_ID"
-                and "OrdenDetalle"."Orden_Detalle_ID" ='."'".$_GET['order']."'".' 
+                and "Orden"."Orden_ID" ='."'".$_GET['order']."'".' 
             ';
             $q = pg_query($conexion,$sql);
             $resultsMetodoPago = pg_fetch_assoc($q);
@@ -195,18 +193,21 @@ foreach($_POST as $aliasMetodo => $status){
 
         <div class="col-6">
             <div class="container border border-black mt-5  py-3 px-3">
-                <div class="row d-flex justify-content-center"><div class="col-6">Detalles de Direccion de Envio</div></div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6">
+                        <div id="legend">
+                            <legend class="">Detalles de Envio</legend>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- DETALLE Envio -->
             <?php $sql = 
-                'select "Calle", "Numero","Comuna","Ciudad",  "Direccion"."Alias_Direccion"
-                from public."OrdenDetalle",public."Direccion",public."Orden"
-                where public."OrdenDetalle"."Alias_Direccion" = public."Direccion"."Alias_Direccion"
+                'select "Calle", "Numero","Comuna","Ciudad", "Direccion"."Alias_Direccion"
+                from public."Orden",public."Direccion"
+                where public."Orden"."Alias_Direccion" = public."Direccion"."Alias_Direccion"
                 and public."Orden"."Cliente_ID" = public."Direccion"."Rut_Titular"
-                and public."OrdenDetalle"."Orden_Detalle_ID" = public."Orden"."Orden_ID"
-                and public."OrdenDetalle"."Orden_Detalle_ID" ='."'".$_GET['order']."'".' 
-                
-            
+                and public."Orden"."Orden_ID" ='."'".$_GET['order']."'".' 
             ';
             $q = pg_query($conexion,$sql);
             #print($sql);
@@ -244,29 +245,16 @@ foreach($_POST as $aliasMetodo => $status){
 </div>
             <?php } ?>
 
-<!-----  query mostrar direccion
+<!--sql
 
-$sql = 
-                'SELECT "Calle","Numero","Comuna","Ciudad","Direccion"."Alias_Direccion"
-                from public."Direccion",public."Cliente",public."Orden",public."OrdenDetalle" 
-                where public."OrdenDetalle"."Orden_Detalle_ID" ='."'".$_GET['order']."'".' 
-                and public."Orden"."Orden_ID" = public."OrdenDetalle"."Orden_Detalle_ID" 
-                and public."Orden"."Cliente_ID" = public."Cliente"."Cliente_ID" 
-                and public."Direccion"."Rut_Titular" = public."Cliente"."Cliente_ID"
-                and public."Direccion"."Alias_Direccion" = (SELECT "Alias_Direccion"
-                                                                  from public."OrdenDetalle"
-                                                                  where "Orden_Detalle_ID" ='."'".$_GET['order']."'".');
-                
-            ';
---->
+select "Calle", "Numero","Comuna","Ciudad", "Direccion"."Alias_Direccion" 
+from public."Orden",public."Direccion" 
+where public."Orden"."Alias_Direccion" = public."Direccion"."Alias_Direccion" 
+and public."Orden"."Cliente_ID" = public."Direccion"."Rut_Titular" 
+and public."Orden"."Orden_ID" ='49697' 
 
+SELECT "Estado_Orden" from public."Orden" where "Orden_ID" ='49697'
 
- <!-- DETALLE PAGO
- $sql = 
-                'SELECT "Numero_Tarjeta","Fecha_Exp",public."MetodoPago"."Alias_Metodo"
-                from public."MetodoPago",public."Cliente",public."Orden",public."OrdenDetalle"
-                where public."OrdenDetalle"."Orden_Detalle_ID" ='."'".$_GET['order']."'".'
-                and public."Orden"."Orden_ID" = public."OrdenDetalle"."Orden_Detalle_ID"
-                and public."Orden"."Cliente_ID" = public."Cliente"."Cliente_ID"
-                and public."MetodoPago"."Rut_Titular" = public."Cliente"."Cliente_ID"
-            ';
+UPDATE public."Orden" 
+SET "Alias_Metodo" = 'tarjeta principal' 
+where "Orden_ID" ='49697'

@@ -1,6 +1,7 @@
 <?php
 include_once("header.php");
 include("config.php");
+include("footer.php");
 ?>
 
 <?php
@@ -29,6 +30,7 @@ if($_GET['step'] == 0){
 <?php
 if($_GET['step'] == 1){
     echo '
+    <p class="display-4 justify-content-center my-5 ml-5">Ingresar Productos</p>
         <div class="row">
             <div class="col-6">
                 <div class="container-fluid">
@@ -77,12 +79,17 @@ if($_GET['step'] == 1){
             </div>
             <div class="col-4">
                 <div class="container border border-black mt-5">
-                    <div class="row justify-content-center">Pedidos de Orden</div>
+                    <div class="row justify-content-center">
+                        <div id="legend">
+                            <legend class="">Pedidos de Orden</legend>
+                        </div>
+                    </div>
                     <div class="row mt-5">
-                        <div class="col-2">ID</div>
-                        <div class="col-4">Producto</div>
-                        <div class="col-4">Cantidad</div>
-                        <div class="col-2">Total</div>
+                        
+                        <div class="col-2 font-weight-bold">ID</div>
+                        <div class="col-4 font-weight-bold">Producto</div>
+                        <div class="col-4 font-weight-bold">Cantidad</div>
+                        <div class="col-2 font-weight-bold">Subtotal</div>
                     </div>
                     ';
                     $total = 0;
@@ -101,7 +108,7 @@ if($_GET['step'] == 1){
                         </div>';
                     }
                     echo '
-                    <div class="row mt-3 mr-3 justify-content-end">Total orden: $'.$total.'</div>
+                    <div class="row mt-3 mr-3 justify-content-end font-weight-bold">Total orden: $'.$total.'</div>
                 </div>
                 <a class="btn btn-primary mt-2" href="/proyectoBDD/api/generarOrden.php/?rut='.$_GET['rut'].'" role="button">Proceder a Pago</a>
             </div>

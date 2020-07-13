@@ -2,6 +2,7 @@
 include("config.php");
 #$conexion
 include("header.php");
+include("footer.php");
 $id = $_GET['id'];
 ?>
 <div class="container mt-5">

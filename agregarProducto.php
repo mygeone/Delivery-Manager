@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 include("config.php");
+include("footer.php");
 
 do {
     $IDInitial = rand(0,99999);
@@ -12,7 +13,6 @@ do {
     $results = pg_fetch_all($q);
 
   } while($results[0]['exists'] == 't');
-
 ?>
 
 
@@ -44,3 +44,12 @@ do {
    
 </div>
 </form>
+
+
+<!---SQL
+
+SELECT exists(select "Prod_ID" 
+            from public."Productos"
+            where "Prod_ID" ='97598') 
+
+-->

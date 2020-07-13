@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 include("config.php");
+include("footer.php");
 ?>
 <div class="container">
 <div class="d-block my-3">

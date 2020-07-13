@@ -21,7 +21,6 @@ if ($newNombre_Prod != ''){
 $preSql = rtrim($preSql, ", ");
 
 $preSql .= 'WHERE "Prod_ID" ='."'".$id."'";
-
 $results = pg_query($conexion, $preSql);
 echo '
         <div class="container my-4 mx-5">
@@ -29,3 +28,22 @@ echo '
             </div>
         </div>
     ';
+header('Refresh: 2; URL=/proyectoBDD/productosMenu.php');
+?>
+
+
+
+<!---- sql
+
+
+UPDATE public."Productos" 
+SET "Nombre_Prod" ='Mani Japones Chico', 
+    "Precio_Prod" ='1500', 
+    "Cant_Prod" ='80'WHERE "
+    Prod_ID" ='34803'
+
+
+
+
+
+-->

@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 include("config.php");
+include("footer.php");
 
 #print_r($_POST);
 
@@ -25,23 +26,54 @@ $queryUser = 'INSERT INTO public."Cliente"("Cliente_ID","Email","Nombre_Cliente"
             values ('."'".$rut."'".','."'".$email."'".','."'".$nombre."'".') ';
 #print($queryUser);
 $resultQueryUser = pg_query($conexion, $queryUser);
-
+if(!$resultQueryUser){
+    echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">Ya existe un usuario registrado con ese rut. <br>
+            Porfavor ingrese un rut distinto.
+            </div>
+        </div>
+    ';
+}
 
 $queryPago = 'INSERT INTO public."MetodoPago"("Rut_Titular","Alias_Metodo","Nombre_Metodo","Numero_Tarjeta","Fecha_Exp","CCV") 
             values('."'".$rut."'".','."'".$AliasPago."'".','."'".$nombre."'".','."'".$Numero_Tarjeta."'".','."'".$Fecha_Expiracion."'".','."'".$CCV."'".')';
 #print($queryPago);
 $resultQueryPago = pg_query($conexion, $queryPago);
-
+if(!$resultQueryPago){
+    echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">Ya existe un metodo de pago ingresado con ese alias <br>
+            para este usuario. Por favor elija otro alias.
+            </div>
+        </div>
+    ';
+}
 
 $queryDireccion = 'INSERT INTO public."Direccion"("Rut_Titular","Calle","Numero","Comuna","Ciudad","Alias_Direccion") 
                 values('."'".$rut."'".','."'".$DireccionCalle."'".','."'".$DireccionNum."'".','."'".$DirecionComuna."'".','."'".$DireccionCiudad."'".','."'".$DireccionAlias."'".')';
 $resulQueryDirecicon = pg_query($conexion, $queryDireccion);
 
-echo '
-        <div class="container my-4 mx-5">
-            <div class="lead">Usuario agregado con exito.
+    if(!$resulQueryDirecicon){
+        echo '
+            <div class="container my-4 mx-5">
+                <div class="lead">Ya existe una direccion ingresado con ese alias <br>
+                para este usuario. Por favor elija otro alias.
+                </div>
             </div>
-        </div>
-    ';
+        ';
+        
+    }
 
+if(isset($resulQueryDirecicon) and isset($resultQueryPago) and isset($resultQueryUser)){
+    echo '
+            <div class="container my-4 mx-5">
+                <div class="lead">Usuario registrado con exito.
+                </div>
+            </div>
+        ';
+        
+}
+header('Refresh: 2; URL=/proyectoBDD/adminClientes.php');
+?>
 ?>

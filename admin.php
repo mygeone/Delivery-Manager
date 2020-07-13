@@ -1,5 +1,6 @@
 <?php
-include_once("header.php")
+include_once("header.php");
+include("footer.php");
 
 ?>
 
@@ -13,6 +14,9 @@ include_once("header.php")
       </div>
       <div class="row mt-3">
         <div class="col-6"><a class="btn btn-primary" href="AdminClientes.php" role="button">Administrar Clientes</a></div>
+      </div>
+      <div class="row mt-3"> 
+        <div class="col-5"><a class="btn btn-primary" href="stats.php" role="button">Estadisticas</a></div>
       </div>
     </div>
 </div>

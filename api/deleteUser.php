@@ -1,6 +1,7 @@
 <?php
 include("../header.php");
 include("../config.php");
+include("../footer.php");
 $userToDelete = pg_escape_string($_GET['idToDelete']);
 
 $sql = ' DELETE FROM public."Cliente"

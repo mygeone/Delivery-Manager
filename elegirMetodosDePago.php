@@ -1,21 +1,22 @@
 <?php
 include_once("header.php");
 include_once("config.php");
+include("footer.php");
 
 #-----escribir metodo direccion en orden detalle-----
 foreach($_POST as $aliasDireccion => $status){
     $aliasDireccion = str_replace('_',' ',($aliasDireccion));
-    $sql = 'UPDATE public."OrdenDetalle" 
+    $sql = 'UPDATE public."Orden" 
             SET "Alias_Direccion" = '."'".$aliasDireccion."'".' 
-            where "Orden_Detalle_ID" ='."'".$_GET['order']."'";
+            where "Orden_ID" ='."'".$_GET['order']."'";
     $q = pg_query($conexion,$sql);
     $results = pg_fetch_all($q);
 }
 
 ?>
 <div class="container mt-5">
-    <div class="row">
-        <div class="lead">Metodos de pago disponibles para usuario:</div>
+    <div id="legend">
+        <legend class="">Metodos disponibles para pago</legend>
     </div>
 </div>
 
@@ -25,6 +26,7 @@ foreach($_POST as $aliasDireccion => $status){
 $sql = 'SELECT * from public."MetodoPago" where "Rut_Titular" ='."'".$_GET['rut']."'";
 $q = pg_query($conexion,$sql);
 $results = pg_fetch_all($q);
+
 echo '
 <form action="/proyectoBDD/mostrarOrden.php/?rut='.$_GET['rut'].'&order='.$_GET['order'].'  " method="POST">';
 foreach($results as $key => $value){
@@ -69,3 +71,10 @@ foreach($results as $key => $value){
 </div>
 
 </form>
+
+<!---sql
+
+UPDATE public."Orden" SET "Alias_Direccion" = 'casa mama' where "Orden_ID" ='49697'
+
+SELECT * from public."MetodoPago" where "Rut_Titular" ='9492314k' 
+

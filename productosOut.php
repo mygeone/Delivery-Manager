@@ -2,6 +2,7 @@
 include("config.php");
 #$conexion
 include("header.php");
+include("footer.php");
 
 $option = $_GET['key'];
 
@@ -12,10 +13,10 @@ if($option == 0){
     <div class="container mt-5">
         <p class="display-4 mb-5">Lista Productos</p>
         <div class="row ">
-            <div class="col-2">Codigo Producto</div>
-            <div class="col-2">Nombre Producto</div>
-            <div class="col-2">Precio Producto</div>
-            <div class="col-2">Cantidad Producto</div>
+            <div class="col-2 font-weight-bold">Codigo Producto</div>
+            <div class="col-2 font-weight-bold">Nombre Producto</div>
+            <div class="col-2 font-weight-bold">Precio Producto</div>
+            <div class="col-2 font-weight-bold">Cantidad Producto</div>
         </div>
         <?php foreach($row as $key => $value){?>
         <div class="row mt-2">
@@ -35,6 +36,7 @@ if($option == 0){
 if($option == 1){?>
     <form method="POST" action="/proyectoBDD/productsFilter.php/?filter=0">
         <div class="container mt-5">
+        <p class="display-4 justify-content-center mb-5">Filtrar Productos</p>
             <div class="form-row">
                 <div class="col-1 pt-2"><div class="form-check"><input class="form-check-input" type="checkbox" name="applyIDFilter" value="1" id="defaultCheck1"></div></div>
                 <div class="col-3 pt-1">Filtrar por ID de Producto</div>

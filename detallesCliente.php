@@ -1,6 +1,7 @@
 <?php 
 include("header.php");
 include("config.php");
+include("footer.php");
 
 
     $query = 'select "Cliente_ID", "Email", "Nombre_Cliente","Alias_Metodo","Nombre_Metodo","Numero_Tarjeta","Fecha_Exp","CCV"
@@ -11,7 +12,7 @@ include("config.php");
     #print($query);
     $q = pg_query($conexion, $query);
     $row = pg_fetch_all($q);
-    print_r($row);
+    #print_r($row);
 ?>
 
 

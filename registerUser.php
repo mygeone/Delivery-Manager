@@ -1,5 +1,6 @@
 <?php
-include("header.php")
+include("header.php");
+include("footer.php");
 #<div class="control-group">
  #   <!-- Button -->
   #  <div class="controls">
@@ -10,6 +11,7 @@ include("header.php")
 
 
 <div class="container">
+    <p class="display-4 justify-content-center my-5">Nuevo Cliente</p>
     <form method=POST action=addUser.php>
     <div id="legend">
         <legend class="">Datos personales</legend>

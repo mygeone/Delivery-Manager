@@ -1,23 +1,101 @@
 <?php
 session_start();
 include("../config.php");
+include("../footer.php");
 
-#----datos ordenes----
-$numOrder = rand(1000,9999);
+#----datos ordenes-------
+$numOrder = rand(1000,99999);
 $clienteOrden = $_GET['rut'];
 $estadoOrden = 'En Preparacion';
 
 #-----productos/cantidad a array------
 $productos = array();
 $productosCantidad = array();
-foreach($_SESSION['cart'][$_GET['rut']] as $idProd => $cantidad){
-    for($i=0;$i<$cantidad;$i++){
-        if(!in_array($idProd,$productos)){
-            array_push($productos,$idProd);
-            array_push($productosCantidad,array($idProd => $cantidad));  
-        }   
-    }
+
+
+    #---INSERT ORDEN-----
+    $sql = 'insert into public."Orden" ("Orden_ID","Cliente_ID","Estado_Orden")
+        values ('."'".$numOrder."',"."'".$clienteOrden."',"."'".'En Preparacion'."'".')
+        ';
+    $q = pg_query($conexion,$sql);
+
+    #---INSERT ordenDetalleProductos
+    foreach($_SESSION['cart'][$_GET['rut']] as $idProd => $cantidad){
+    $PrecioQuery = ' select "Precio_Prod"
+            from public."Productos"
+            where "Prod_ID" = '."'".$idProd."'".'
+    ';
+    $q = pg_query($conexion,$PrecioQuery);
+    $resultsPrecio = pg_fetch_assoc($q,'Precio_Prod');
+    $insertQuery = ' insert into public."OrdenDetalleProductos" ("Orden_ID","ID_Producto_Pagado","Cant_Producto_Pagado","Precio_Producto_Pagado")
+                        values ('  ."'".$numOrder."',"   ."'".$idProd."',"."'".$cantidad."',"."'".$resultsPrecio['Precio_Prod']."'".')
+    ';
+    $q = pg_query($conexion,$insertQuery);
+
+
+    #----update stock----
+    $sqlUpdateStock = 'UPDATE public."Productos" 
+                        SET "Cant_Prod" = "Cant_Prod" -'.$cantidad.' 
+                        WHERE "Prod_ID"='."'".$idProd."'".' 
+                ';
+    $q = pg_query($conexion,$sqlUpdateStock);
 }
+
+header('Location: \proyectoBDD\elegirDireccion.php\?step=1&rut='.$_GET['rut'].'&order='.$numOrder);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+die();
+
 #------pregunta por el total pagado--------
 $preSql = '';
 $count = 0;
@@ -92,14 +170,7 @@ $preSqlOrdenDetalle = 'INSERT into public."OrdenDetalle" ("Orden_Detalle_ID","Pr
 $q = pg_query($conexion,$preSqlOrdenDetalle);
 
 
-#-------actualiza stock---------
-foreach($listProducts as $key => $ID){
-    $sqlUpdateStock = 'UPDATE public."Productos" 
-                    SET "Cant_Prod" = "Cant_Prod" -'.$listCantidad[$key].' 
-                    WHERE "Prod_ID"='."'".$ID."'".' 
-                ';
-    $q = pg_query($conexion,$sqlUpdateStock);
-}
+
 header('Location: \proyectoBDD\elegirDireccion.php\?step=1&rut='.$_GET['rut'].'&order='.$numOrder);
 ?>
 

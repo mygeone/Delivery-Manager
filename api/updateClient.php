@@ -1,6 +1,7 @@
 <?php
 include('../config.php');
 include("../header.php");
+include("../footer.php");
 #print_r($_POST);
 $rutToModify = $_GET['id'];
 
@@ -27,4 +28,6 @@ echo '
             </div>
         </div>
     ';
+    header( "refresh:2;url= \proyectoBDD\adminClientes.php" );
+
 ?>

@@ -2,6 +2,7 @@
 include("config.php");
 #$conexion
 include("header.php");
+include("footer.php");
 ?>
 
 <div class="container pt-5">

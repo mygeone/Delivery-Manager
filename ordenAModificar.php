@@ -1,10 +1,11 @@
 <?php
 include("header.php");
+include("footer.php");
 echo '
    
         <div class="container mt-5">
             <p class="display-4 mb-5">Modificar Orden    </p>
-            <form action="\proyectoBDD\api\modificarOrden.php" method="get">
+            <form action="\proyectoBDD\modificarOrden.php" method="get">
                 <div class="form-row">
                     <div class="col-4">
                         <div class="form-group">

@@ -1,11 +1,14 @@
 <?php
 include_once("header.php");
 include_once("config.php");
+include("footer.php");
 
 ?>
 <div class="container mt-5">
     <div class="row">
-        <div class="lead">Direcciones de envio disponibles para usuario:</div>
+        <div id="legend">
+            <legend class="">Direcciones disponibles para envio</legend>
+        </div>
     </div>
 </div>
 
@@ -31,19 +34,19 @@ foreach($results as $key => $value){
                             <div class="col-4">'.$value['Calle'].'</div>
                         </div>
                         <div class="row">
-                            <div class="col-2">Numero:</div>
+                            <div class="col-2 ">Numero:</div>
                             <div class="col-4">'.$value['Numero'].'</div>
                         </div>
                         <div class="row">
-                            <div class="col-2">Comuna:</div>
+                            <div class="col-2 ">Comuna:</div>
                             <div class="col-4">'.$value['Comuna'].'</div>
                         </div>
                         <div class="row">
-                            <div class="col-2">Ciudad:</div>
+                            <div class="col-2 ">Ciudad:</div>
                             <div class="col-4">'.$value['Ciudad'].'</div>
                         </div>  
                         <div class="row">
-                            <div class="col-2">Alias Direccion:</div>
+                            <div class="col-2 ">Alias Direccion:</div>
                             <div class="col-4">'.$value['Alias_Direccion'].'</div>
                         </div>
                     </div>

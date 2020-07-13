@@ -1,6 +1,7 @@
 <?php
 include_once("header.php");
 include("config.php");
+include("footer.php");
 
 $RUT="'".$_POST['usuario']."' ";
 

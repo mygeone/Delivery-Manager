@@ -11,17 +11,20 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <div class="container pt-5">
-    <p class="display-4 mb-5">Delivery Manager</p>
-      <div class="row ">
+  <?php 
+  include("header.php");
+  include("footer.php");
+  ?>
+
+    <div class="container justify-content-center pt-5">
+    <p class="display-4 justify-content-center mb-5">Delivery Manager</p>
+      <div class="row  justify-content-center">
         <div class="col-5"><a class="btn btn-primary" href="admin.php" role="button">Vista Administracion</a></div>
       </div>
-      <div class="row mt-3"> 
+      <div class="row mt-3 justify-content-center"> 
         <div class="col-5"><a class="btn btn-primary" href="cliente.php" role="button">Vista Cliente</a></div>
       </div>
-      <div class="row mt-3"> 
-        <div class="col-5"><a class="btn btn-primary" href="cliente.php" role="button">Estadisticas</a></div>
-      </div>
+      
         <?php 
           #include("config.php");
           #$q = pg_query($conexion, 'select * from public."Productos" ');

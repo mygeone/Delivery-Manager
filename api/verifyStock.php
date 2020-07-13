@@ -1,6 +1,7 @@
 <?php
 include("../config.php");
 include("../header.php");
+include("../footer.php");
 #print_r($_POST);
 
 $sql = 'SELECT "Cant_Prod" FROM public."Productos" where "Prod_ID" ='."'".pg_escape_string($_POST['id'])."'";
@@ -9,13 +10,23 @@ $results = pg_fetch_assoc($q);
 
 
 if($_POST['cantidad']<=0){
-    echo json_encode('Ingrese cantidad mayor que 0');
-    header( "refresh:1;url= \proyectoBDD\ingresarOrden.php\?step=1&rut=".$_POST['rutCliente']."" );
+
+    echo '
+    <div class="container my-4 mx-5">
+        <div class="lead">Ingrese una cantidad mayor que 0.
+        </div>
+    </div>
+    ';
+    header( "refresh:2;url= \proyectoBDD\ingresarOrden.php\?step=1&rut=".$_POST['rutCliente']."" );
     
-    #header("Location:\proyectoBDD\ingresarOrden.php\?step=1&rut=".$_POST['rutCliente'].""  );
 }else if($_POST['cantidad'] > $results['Cant_Prod']){
-    echo json_encode('Cantidad supera stock maximo');
-    header( "refresh:1;url= \proyectoBDD\ingresarOrden.php\?step=1&rut=".$_POST['rutCliente']."" );
+    echo '
+    <div class="container my-4 mx-5">
+        <div class="lead">La cantidad solicitada supera el stock disponible.
+        </div>
+    </div>
+    ';
+    header( "refresh:2;url= \proyectoBDD\ingresarOrden.php\?step=1&rut=".$_POST['rutCliente']."" );
 }
 
 if($_POST['cantidad'] > 0 and $_POST['cantidad'] <= $results['Cant_Prod']){

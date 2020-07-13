@@ -8,9 +8,9 @@ include("config.php");
     <div class="container mt-5">
     <p class="display-4 mb-5">Ver Ordenes</p>
         <div class="row ">
-            <div class="col-2">ID Orden </div>
-            <div class="col-2">Cliente </div>
-            <div class="col-2">Estado Orden</div>
+            <div class="col-2 font-weight-bold">ID Orden </div>
+            <div class="col-2 font-weight-bold">Cliente </div>
+            <div class="col-2 font-weight-bold">Estado Orden</div>
         </div>
         <?php 
         foreach($row as $key => $value){?>
