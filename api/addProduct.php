@@ -7,7 +7,7 @@ $sql = ' INSERT INTO public."Productos" ("Prod_ID","Nombre_Prod","Precio_Prod","
         values ('."'".$_POST['IDProductToAdd']."'".','."'".$_POST['NameProductToAdd']."'".','."'".$_POST['priceProductToAdd']."'".','."'".$_POST['stockProductToAdd']."'".')
         ';
 $q = pg_query($conexion,$sql);
-print($sql);
+#print($sql);
 
 if(!$q){
     echo'

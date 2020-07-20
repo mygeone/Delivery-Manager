@@ -21,16 +21,16 @@ include("footer.php");
         </div>
         ';
         exit();
-    }
+    #}
 
-    if($results[0]['Estado_Orden'] == 'Cancelada'){
-        echo '
-        <div class="container my-4 mx-5">
-            <div class="lead">Los datos de orden no estan disponibles <br>
-            porque la orden fue cancelada.
-            </div>
-        </div>
-    ';
+ #   if($results[0]['Estado_Orden'] == 'Cancelada'){
+  #  echo '
+#        <div class="container my-4 mx-5">
+ #           <div class="lead">Los datos de orden no estan disponibles <br>
+#            porque la orden fue cancelada.
+  #          </div>
+  #      </div>
+   # ';
     } else {
 
 
@@ -83,7 +83,7 @@ foreach($_POST as $aliasMetodo => $status){
                         </div>
                         <div class="row my-3">
                             <div class="col-5">Estado Orden: </div>
-                            <div class="col-7"> <?php echo $results['Estado_Orden'] ?> </div>
+                            <div class="col-7"> <?php echo $results['Estado_Orden']; $statusOrder = $results['Estado_Orden']  ?> </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,6 @@ foreach($_POST as $aliasMetodo => $status){
                     <div class="col-12  border border-black py-3 px-3">
                        <div class="row">
                         <div class="col-2">ID Producto</div>
-                        <div class="col-3">Nombre </div>
                         <div class="col-2">Cantidad</div>
                         <div class="col-3">Precio Producto</div>
                         <div class="col-2">Subtotal</div>
@@ -128,14 +127,10 @@ foreach($_POST as $aliasMetodo => $status){
                         from public."Productos"
                         where "Prod_ID" ='."'".$dataProduct['ID_Producto_Pagado']."'".    '
                 ';
-
-
-
-
+                
             echo '
             <div class="row">
                 <div class="col-2">'.$dataProduct['ID_Producto_Pagado'].'</div>
-                <div class="col-3">'.$dataProduct['Cant_Producto_Pagado'].'</div>
                 <div class="col-2">'.$dataProduct['Cant_Producto_Pagado'].'</div>
                 <div class="col-3">'.$dataProduct['Precio_Producto_Pagado'].'</div>
                 <div class="col-2">$'.intval($dataProduct['Precio_Producto_Pagado'])*intval($dataProduct['Cant_Producto_Pagado']).'</div>
@@ -240,10 +235,12 @@ foreach($_POST as $aliasMetodo => $status){
     </div>
 </div>
 
+<?php if($statusOrder != 'Cancelada'){ ?>
 <div class="container">
     <a href="\proyectoBDD\api\cancelarOrden.php\?idToDelete=<?php echo $_GET['order'];?>" class="btn btn-danger" role="button">Cancelar Orden</a>
 </div>
-            <?php } ?>
+<?php }
+} ?>
 
 <!--sql
 

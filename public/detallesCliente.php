@@ -55,7 +55,7 @@ include("footer.php");
                     <div class="container border border-black my-2 py-3">
                         <div class="row mt-3">
                             <div class="col-6">Numero Tarjeta:</div>
-                            <div class="col-6"><?php echo $dataPago['Alias_Metodo']?></div>
+                            <div class="col-6"><?php echo $dataPago['Numero_Tarjeta']?></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">Nombre Metodo: </div>
@@ -76,6 +76,9 @@ include("footer.php");
                         <div class="row mt-3">
                             <div class="col-6">CCV: </div>
                             <div class="col-6"><?php echo $dataPago['CCV']?></div>
+                        </div>
+                        <div class="row mt-2 mr-2 justify-content-end">
+                            <a class="btn btn-primary btn-sm" href="/proyectoBDD/modifyPago.php/?id=<?php echo $_GET['idCliente'];?>&alias=<?php echo $dataPago['Alias_Metodo']?>" role="button">Modificar</a>
                         </div>
                     </div>
                 <?php } ?>
@@ -115,6 +118,9 @@ include("footer.php");
                         <div class="row mt-3">
                             <div class="col-6">Alias Direccion: </div>
                             <div class="col-6"><?php echo $dataDireccion['Alias_Direccion']?></div>
+                        </div>
+                        <div class="row mt-2 mr-2 justify-content-end">
+                        <a class="btn btn-primary btn-sm" href="/proyectoBDD/modifyDireccion.php/?id=<?php echo $_GET['idCliente'];?>&alias=<?php echo $dataDireccion['Alias_Direccion']?>" role="button">Modificar</a>
                         </div>
                     </div>
                 <?php } ?>

@@ -6,6 +6,11 @@ include("footer.php");
 #print_r($_POST);
 
 $rut=pg_escape_string($_POST['rut']);
+
+function rut( $rut ) {
+    return number_format( substr ( $rut, 0 , -1 ) , 0, "", ".") . '-' . substr ( $rut, strlen($rut) -1 , 1 );
+}
+
 $nombre=pg_escape_string($_POST['nombre']);
 $email=pg_escape_string($_POST['email']);
 
@@ -23,7 +28,7 @@ $DireccionAlias = pg_escape_string($_POST['direccion_alias']);
 
 
 $queryUser = 'INSERT INTO public."Cliente"("Cliente_ID","Email","Nombre_Cliente") 
-            values ('."'".$rut."'".','."'".$email."'".','."'".$nombre."'".') ';
+            values ('."'".rut($rut)."'".','."'".$email."'".','."'".$nombre."'".') ';
 #print($queryUser);
 $resultQueryUser = pg_query($conexion, $queryUser);
 if(!$resultQueryUser){
@@ -75,5 +80,4 @@ if(isset($resulQueryDirecicon) and isset($resultQueryPago) and isset($resultQuer
         
 }
 header('Refresh: 2; URL=/proyectoBDD/adminClientes.php');
-?>
 ?>

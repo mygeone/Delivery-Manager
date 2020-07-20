@@ -6,9 +6,27 @@ include("footer.php");
 $OrderToVerify = pg_escape_string($_GET['ordenToModify']);
 $query = ' SELECT exists(select * from public."OrdenDetalleProductos" where "Orden_ID" ='."'".$_GET['ordenToModify']."'".')';
 $q = pg_query($conexion,$query);
-
-
 $results = pg_fetch_all($q);
+
+    $queryStatus = ' SELECT "Estado_Orden" from public."Orden" where "Orden_ID" ='."'".$_GET['ordenToModify']."'";
+    $qStatus = pg_query($conexion,$queryStatus);
+    $resultsStatus = pg_fetch_assoc($qStatus);
+    #print_r($resultsStatus);
+    
+    if(isset($resultsStatus['Estado_Orden']) and $resultsStatus['Estado_Orden'] == 'Cancelada'){
+        echo '
+            <div class="container my-4 mx-5">
+                <div class="lead">La orden ingresada fue cancelada.
+                </div>
+            </div>
+            ';
+            header( "refresh:2;url= \proyectoBDD\adminOrdenes.php" );
+       
+        die();
+        
+    }
+
+
 if($results[0]['exists'] == 't'){ ?>
 
 <form action="/proyectoBDD/api/updateOrder.php/?id=<?php echo $_GET['ordenToModify']?>"  method="POST"  >

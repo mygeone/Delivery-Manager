@@ -13,7 +13,14 @@ if(isset($_POST['applyIDFilter']) and $_POST['applyIDFilter'] != ''){
     $results = pg_query($conexion, $query);
     $rows = pg_fetch_all($results);
 
-    if(empty($rows)){ print('No existe producto con el id solicitada');}
+    if(empty($rows)){ echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">No existe producto con la ID solicitada.
+            </div>
+        </div>
+        ';
+        die();
+    }
     if(!empty($rows)){
             echo '
             <div class="container mt-5">
@@ -65,11 +72,26 @@ if(isset($_POST['applyStockFilter']) and isset($_POST['applyPriceFilter'])){
 if(!isset($_POST['applyIDFilter'])){
     $results = pg_query($conexion,$preSql);
     $rows = pg_fetch_all($results);
+
+    if(empty($rows)){
+        echo '
+        <div class="container my-4 mx-5">
+            <div class="lead">No existe producto con los parametros solicitados.
+            </div>
+        </div>
+        ';
+        die();
+
+    }
     #print_r($rows);
+    ?>         
+    <div class="container">
+        <p class="display-4 justify-content-center mt-5">Delivery Manager</p>
+    </div> 
+    <?php
     foreach($rows as $key => $value){
         echo '
             <div class="container mt-5">
-                <p class="display-4 justify-content-center mb-5">Delivery Manager</p>
                 <div class="row"><div class="col-2">ID Producto:</div>'.$value['Prod_ID'].'</div>
                 <div class="row"><div class="col-2">Nombre Producto:</div>'.$value['Nombre_Prod'].'</div>
                 <div class="row"><div class="col-2">Precio Producto:</div>'.$value['Precio_Prod'].'</div>

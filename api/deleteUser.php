@@ -4,10 +4,16 @@ include("../config.php");
 include("../footer.php");
 $userToDelete = pg_escape_string($_GET['idToDelete']);
 
+function rut( $rut ) {
+    return number_format( substr ( $rut, 0 , -1 ) , 0, "", ".") . '-' . substr ( $rut, strlen($rut) -1 , 1 );
+}
+
+
 $sql = ' DELETE FROM public."Cliente"
          WHERE "Cliente_ID" ='."'".$userToDelete."'".'
     ';
     $q = pg_query($conexion,$sql);
+    $results = pg_fetch_row($q);
 
 if($results == 1){
     echo '
